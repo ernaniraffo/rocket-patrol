@@ -43,6 +43,7 @@ class Play extends Phaser.Scene {
         });
 
         this.p1Score = 0;
+        this.timeCount = game.settings.gameTimer;
 
         // display score
         let scoreConfig = {
@@ -58,10 +59,11 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-        
+        this.timeRight = this.add.text(borderUISize + borderPadding + game.config.width/1.4, borderUISize + borderPadding*2, this.timeCount, scoreConfig);
+
         // game over flag
         this.gameOver = false;
-        
+
         // 60 second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
@@ -83,6 +85,9 @@ class Play extends Phaser.Scene {
         }
 
         this.starfield.tilePositionX -= 4;
+    
+        this.timeRight.text = game.settings.gameTimer/1000 - Math.floor(this.clock.elapsed/1000);
+
         this.p1Rocket.update();
         this.ship01.update();
         this.ship02.update();
