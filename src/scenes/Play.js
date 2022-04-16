@@ -57,6 +57,7 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
+        //
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
         
         // game over flag
